@@ -1,0 +1,9 @@
+#!bin/bash
+cd /root/src/AutoComplete
+hdfs dfs -rm -r /output
+hdfs dfs -rm -r input/*
+hdfs dfs -put /root/src/AutoComplete/bookList/*  input/
+cd /root/src/AutoComplete/src/main/java
+hadoop com.sun.tools.javac.Main *.java
+jar cf autocomplete.jar *.class
+hadoop jar autocomplete.jar Driver input /output 2 3 4 
